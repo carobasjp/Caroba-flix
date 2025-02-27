@@ -1,16 +1,14 @@
-// server.js
 const WebSocketServer = require('./websocket-server');
 const http = require('http');
 
-// Configuração do servidor
-const PORT = process.env.PORT || 8080;
+// Converta process.env.PORT em número. Se não existir, use 8080.
+const numericPort = parseInt(process.env.PORT, 10) || 8080;
 const CLEANUP_INTERVAL = 60 * 60 * 1000; // 1 hora
 
-// Iniciar servidor WebSocket
-const wsServer = new WebSocketServer({ port: PORT });
+// Iniciar servidor WebSocket na porta principal
+const wsServer = new WebSocketServer({ port: numericPort });
 wsServer.start();
-
-console.log(`Servidor Netflix Sync iniciado na porta ${PORT}`);
+console.log(`Servidor Netflix Sync iniciado na porta ${numericPort}`);
 
 // Configurar limpeza periódica de sessões inativas
 setInterval(() => {
@@ -41,10 +39,11 @@ const httpServer = http.createServer((req, res) => {
   }
 });
 
-httpServer.listen(PORT + 1);
-console.log(`Servidor de status HTTP iniciado na porta ${PORT + 1}`);
+// Subir o servidor HTTP na porta principal + 1
+httpServer.listen(numericPort + 1);
+console.log(`Servidor de status HTTP iniciado na porta ${numericPort + 1}`);
 
-// Tratamento de encerramento
+// Tratamento de encerramento (Ctrl+C, etc.)
 process.on('SIGINT', () => {
   console.log('Encerrando servidores...');
   
