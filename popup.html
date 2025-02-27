@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caroba Flix</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Caroba Flix</h1>
+    
+    <div id="status-container">
+      <div id="connection-status" class="status-indicator disconnected">
+        <span id="status-text">Desconectado</span>
+      </div>
+    </div>
+    
+    <div id="not-connected-container">
+      <div class="action-container">
+        <button id="create-session-btn" class="primary-btn">Criar Nova Sessão</button>
+      </div>
+      
+      <div class="divider">ou</div>
+      
+      <div class="action-container">
+        <input type="text" id="session-code-input" placeholder="Código da sessão">
+        <button id="join-session-btn" class="secondary-btn">Entrar na Sessão</button>
+      </div>
+    </div>
+    
+    <div id="connected-container" style="display:none;">
+      <div class="session-info">
+        <p>Sessão: <span id="current-session-code">XXXXXX</span> 
+          <button id="copy-code-btn" class="icon-btn">📋</button>
+        </p>
+        <p>Participantes: <span id="participant-count">1</span></p>
+      </div>
+      
+      <div class="action-container">
+        <button id="disconnect-btn" class="danger-btn">Desconectar</button>
+      </div>
+      
+      <div id="chat-container">
+        <div id="chat-messages"></div>
+        <div class="chat-input-container">
+          <input type="text" id="chat-input" placeholder="Enviar mensagem...">
+          <button id="send-message-btn">Enviar</button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="netflix-warning" style="display:none;">
+      <p>Você não está na Netflix. Abra o site da Netflix para usar esta extensão.</p>
+      <button id="open-netflix-btn" class="primary-btn">Abrir Netflix</button>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
